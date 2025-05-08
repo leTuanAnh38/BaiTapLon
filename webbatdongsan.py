@@ -26,12 +26,16 @@ def crawl_data():
 
     data = []
     page = 1
-
+    # Bước 5: Duyệt qua tất cả các trang
     while True:
+        # Bước 1–2: Vào trang web đã chọn với tỉnh/TP và loại nhà đất (Đà Nẵng - phòng trọ)
+
         url = f"https://alonhadat.com.vn/nha-dat/can-ban/phong-tro-nha-tro/3/da-nang/trang--{page}.html"
         print(f" Đang thu thập trang {page}: {url}")
         driver.get(url)
         time.sleep(3)
+        # Bước 3: (Không có nút tìm kiếm – bỏ qua bước này)
+        # Bước 4: Lấy dữ liệu hiển thị ở bài viết
 
         try:
             wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".content-item.item")))
@@ -68,6 +72,7 @@ def crawl_data():
         page += 1
 
     driver.quit()
+     # Bước 6: Lưu dữ liệu đã lấy được vào file Excel
 
     df = pd.DataFrame(data, columns=["Tiêu đề", "Mô tả", "Diện tích", "Giá", "Địa chỉ"])
     today = datetime.datetime.now().strftime("%Y-%m-%d")
@@ -75,8 +80,9 @@ def crawl_data():
     df.to_excel(filename, index=False)
     print(f" Đã lưu dữ liệu vào: {filename}")
 
-# Lên lịch chạy mỗi ngày lúc 6h sáng
-schedule.every().day.at("15:36").do(crawl_data)
+# Bước 7: Set lịch chạy vào lúc 6h sáng mỗi ngày (hiện để test lúc 15:36)
+
+schedule.every().day.at("06:00").do(crawl_data)
 
 print(" Đang chờ đến 6h sáng mỗi ngày để chạy crawler... Nhấn Ctrl+C để dừng.")
 while True:

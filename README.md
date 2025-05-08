@@ -13,5 +13,5 @@ Dự án Python tự động thu thập dữ liệu nhà đất đang rao bán t
 
 1. Clone project:
    ```bash
-   git clone https://github.com/yourusername/alonhadat-crawler.git
+   git clone https://github.com/leTuanAnh38/BaiTapLon.git
    cd alonhadat-crawler
