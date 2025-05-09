@@ -116,7 +116,7 @@ def crawl_data():
     print(f"\nĐã lưu dữ liệu vào: {filename}")
 
 # --- Bước 7: Lên lịch chạy tự động ---
-schedule.every().day.at("10:44").do(crawl_data)
+schedule.every().day.at("06:00").do(crawl_data)
 
 print("Đang chờ đến 06:00 mỗi ngày để thu thập dữ liệu... Nhấn Ctrl+C để dừng.")
 while True:
